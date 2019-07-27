@@ -20,8 +20,8 @@
 #include "esp_err.h"
 #include "esp_log.h"
 
-#define SDA_PIN                            16
-#define SCL_PIN                            17
+#define SDA_PIN                            21 //16
+#define SCL_PIN									 22 //17
 #define ACK_CHECK_EN                       0x1              /*!< I2C master will check ack from slave*/
 #define ACK_CHECK_DIS                      0x0              /*!< I2C master will not check ack from slave */
 #define ACK_VAL                            0x0              /*!< I2C ack value */
@@ -103,11 +103,11 @@ ATCA_STATUS hal_i2c_init(void *hal, ATCAIfaceCfg *cfg)
             conf.sda_pullup_en = GPIO_PULLUP_DISABLE;
             conf.scl_pullup_en = GPIO_PULLUP_DISABLE;
             conf.master.clk_speed = 100000; //cfg->atcai2c.baud;
-//            ESP_LOGI(TAG, "Configuring I2C");
+            ESP_LOGI(TAG, "Configuring I2C");
             rc = i2c_param_config(i2c_hal_data[bus]->id, &conf);
-//            ESP_LOGD(TAG, "I2C Param Config: %s", esp_err_to_name(rc));
+            ESP_LOGI(TAG, "I2C Param Config: %s", esp_err_to_name(rc));
             rc = i2c_driver_install(i2c_hal_data[bus]->id, I2C_MODE_MASTER, 0, 0, 0);
-//            ESP_LOGD(TAG, "I2C Driver Install; %s", esp_err_to_name(rc));
+            ESP_LOGI(TAG, "I2C Driver Install; %s", esp_err_to_name(rc));
             i2c_hal_data[bus]->bus_index = bus;
         }
         else
@@ -119,7 +119,7 @@ ATCA_STATUS hal_i2c_init(void *hal, ATCAIfaceCfg *cfg)
 
         return ATCA_SUCCESS;
     }
-//    ESP_LOGE(TAG, "I2C init failed");
+    ESP_LOGE(TAG, "I2C init failed");
     return ATCA_COMM_FAIL;
 }
 
@@ -198,7 +198,7 @@ ATCA_STATUS hal_i2c_receive(ATCAIface iface, uint8_t *rxdata, uint16_t *rxlength
         (void)i2c_cmd_link_delete(cmd);
     }
 
-//    ESP_LOG_BUFFER_HEX(TAG, rxdata, *rxlength);
+    //ESP_LOG_BUFFER_HEX(TAG, rxdata, *rxlength);
 
     if (ESP_OK != rc)
     {
@@ -226,6 +226,7 @@ ATCA_STATUS hal_i2c_release(void *hal_data)
 
 ATCA_STATUS hal_i2c_wake(ATCAIface iface)
 {
+		  esp_err_t rc;
     ATCAIfaceCfg *cfg = atgetifacecfg(iface);
 //    uint32_t bdrt = cfg->atcai2c.baud;
     uint16_t rxlen;
@@ -243,6 +244,8 @@ ATCA_STATUS hal_i2c_wake(ATCAIface iface)
     (void)i2c_master_write_byte(cmd, I2C_MASTER_WRITE, ACK_CHECK_DIS);
     (void)i2c_master_stop(cmd);
     (void)i2c_master_cmd_begin(cfg->atcai2c.bus, cmd, 10);
+    //rc = i2c_master_cmd_begin(I2C_NUM_0, cmd, 20);
+	 //ESP_LOGI(TAG, "wake; %s", esp_err_to_name(rc));
     (void)i2c_cmd_link_delete(cmd);
 
     atca_delay_ms(10);   // wait tWHI + tWLO which is configured based on device type and configuration structure
