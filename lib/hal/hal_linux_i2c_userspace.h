@@ -31,19 +31,19 @@
 /** \defgroup hal_ Hardware abstraction layer (hal_)
  *
  * \brief
- * These methods define the hardware abstraction layer for communicating with a CryptoAuth device
+ * These methods define the hardware abstraction layer for communicating with a
+ CryptoAuth device
  *
    @{ */
 
-#define MAX_I2C_BUSES   4   // Raspberry Pi has 2 TWI
+#define MAX_I2C_BUSES 4 // Raspberry Pi has 2 TWI
 
 // A structure to hold I2C information
-typedef struct atcaI2Cmaster
-{
-    char i2c_file[16];
-    int  ref_ct;
-    // for conveniences during interface release phase
-    int bus_index;
+typedef struct atcaI2Cmaster {
+  char i2c_file[16];
+  int ref_ct;
+  // for conveniences during interface release phase
+  int bus_index;
 } ATCAI2CMaster_t;
 
 /** @} */

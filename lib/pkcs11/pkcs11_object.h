@@ -43,38 +43,36 @@
 #define PKCS11_OBJECT_H_
 
 #include "cryptoki.h"
-#include "pkcs11_config.h"
 #include "pkcs11_attrib.h"
+#include "pkcs11_config.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-typedef struct _pkcs11_object
-{
+typedef struct _pkcs11_object {
 
-    /** The Class Identifier */
-    CK_OBJECT_CLASS class_id;
-    /** The Class Type */
-    CK_ULONG class_type;
-    /** List of attribute models this object possesses */
-    pkcs11_attrib_model const * attributes;
-    /** Count of attribute models */
-    CK_ULONG     count;
-    CK_ULONG     size;
-    CK_VOID_PTR  config;
-    CK_BYTE      slot;
-    CK_FLAGS     flags;
-    CK_UTF8CHAR  name[PKCS11_MAX_LABEL_SIZE + 1];
-    void const * data;
+  /** The Class Identifier */
+  CK_OBJECT_CLASS class_id;
+  /** The Class Type */
+  CK_ULONG class_type;
+  /** List of attribute models this object possesses */
+  pkcs11_attrib_model const *attributes;
+  /** Count of attribute models */
+  CK_ULONG count;
+  CK_ULONG size;
+  CK_VOID_PTR config;
+  CK_BYTE slot;
+  CK_FLAGS flags;
+  CK_UTF8CHAR name[PKCS11_MAX_LABEL_SIZE + 1];
+  void const *data;
 } pkcs11_object, *pkcs11_object_ptr;
 
-typedef struct _pkcs11_object_cache_t
-{
-    /** Arbitrary (but unique) non-null identifier for an object */
-    CK_OBJECT_HANDLE handle;
-    /** The actual object  */
-    pkcs11_object_ptr object;
+typedef struct _pkcs11_object_cache_t {
+  /** Arbitrary (but unique) non-null identifier for an object */
+  CK_OBJECT_HANDLE handle;
+  /** The actual object  */
+  pkcs11_object_ptr object;
 } pkcs11_object_cache_t;
 
 extern pkcs11_object_cache_t pkcs11_object_cache[];
@@ -82,24 +80,31 @@ extern pkcs11_object_cache_t pkcs11_object_cache[];
 extern const pkcs11_attrib_model pkcs11_object_monotonic_attributes[];
 extern const CK_ULONG pkcs11_object_monotonic_attributes_count;
 
-#define PKCS11_OBJECT_FLAG_DESTROYABLE      0x01
-#define PKCS11_OBJECT_FLAG_MODIFIABLE       0x02
-#define PKCS11_OBJECT_FLAG_DYNAMIC          0x04
+#define PKCS11_OBJECT_FLAG_DESTROYABLE 0x01
+#define PKCS11_OBJECT_FLAG_MODIFIABLE 0x02
+#define PKCS11_OBJECT_FLAG_DYNAMIC 0x04
 
-CK_RV pkcs11_object_alloc(pkcs11_object_ptr * ppObject);
+CK_RV pkcs11_object_alloc(pkcs11_object_ptr *ppObject);
 CK_RV pkcs11_object_free(pkcs11_object_ptr pObject);
-CK_RV pkcs11_object_check(pkcs11_object_ptr * ppObject, CK_OBJECT_HANDLE handle);
-CK_RV pkcs11_object_find(pkcs11_object_ptr * ppObject, CK_ATTRIBUTE_PTR pTemplate, CK_ULONG ulCount);
+CK_RV pkcs11_object_check(pkcs11_object_ptr *ppObject, CK_OBJECT_HANDLE handle);
+CK_RV pkcs11_object_find(pkcs11_object_ptr *ppObject,
+                         CK_ATTRIBUTE_PTR pTemplate, CK_ULONG ulCount);
 
 CK_RV pkcs11_object_get_class(CK_VOID_PTR pObject, CK_ATTRIBUTE_PTR pAttribute);
 CK_RV pkcs11_object_get_name(CK_VOID_PTR pObject, CK_ATTRIBUTE_PTR pAttribute);
 CK_RV pkcs11_object_get_type(CK_VOID_PTR pObject, CK_ATTRIBUTE_PTR pAttribute);
-CK_RV pkcs11_object_get_destroyable(CK_VOID_PTR pObject, CK_ATTRIBUTE_PTR pAttribute);
-CK_RV pkcs11_object_get_size(CK_SESSION_HANDLE hSession, CK_OBJECT_HANDLE hObject, CK_ULONG_PTR pulSize);
-CK_RV pkcs11_object_get_handle(pkcs11_object_ptr pObject, CK_OBJECT_HANDLE_PTR phObject);
+CK_RV pkcs11_object_get_destroyable(CK_VOID_PTR pObject,
+                                    CK_ATTRIBUTE_PTR pAttribute);
+CK_RV pkcs11_object_get_size(CK_SESSION_HANDLE hSession,
+                             CK_OBJECT_HANDLE hObject, CK_ULONG_PTR pulSize);
+CK_RV pkcs11_object_get_handle(pkcs11_object_ptr pObject,
+                               CK_OBJECT_HANDLE_PTR phObject);
 
-CK_RV pkcs11_object_create(CK_SESSION_HANDLE hSession, CK_ATTRIBUTE_PTR pTemplate, CK_ULONG ulCount, CK_OBJECT_HANDLE_PTR phObject);
-CK_RV pkcs11_object_destroy(CK_SESSION_HANDLE hSession, CK_OBJECT_HANDLE hObject);
+CK_RV pkcs11_object_create(CK_SESSION_HANDLE hSession,
+                           CK_ATTRIBUTE_PTR pTemplate, CK_ULONG ulCount,
+                           CK_OBJECT_HANDLE_PTR phObject);
+CK_RV pkcs11_object_destroy(CK_SESSION_HANDLE hSession,
+                            CK_OBJECT_HANDLE hObject);
 
 CK_RV pkcs11_object_deinit(pkcs11_lib_ctx_ptr pContext);
 

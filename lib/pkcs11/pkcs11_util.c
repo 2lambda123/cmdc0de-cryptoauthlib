@@ -35,43 +35,34 @@
  * \defgroup pkcs11 Utilities (pkcs11_util_)
    @{ */
 
-
-
 /*
  * \brief Helper function to make sure buffers meet the special padding
  * requirements of PKCS11
  * \param[IN/OUT] buf   Target buffer, will be padded with spaces
  * \param[IN]  buf_len  Length of the buffer
  */
-void pkcs11_util_escape_string(CK_UTF8CHAR_PTR buf, CK_ULONG buf_len)
-{
-    if (buf && buf_len)
-    {
-        CK_ULONG i;
-        for (i = 0; i < buf_len; i++)
-        {
-            if (0x20 > buf[i] || 0x7E < buf[i])
-            {
-                buf[i] = ' ';
-            }
-        }
+void pkcs11_util_escape_string(CK_UTF8CHAR_PTR buf, CK_ULONG buf_len) {
+  if (buf && buf_len) {
+    CK_ULONG i;
+    for (i = 0; i < buf_len; i++) {
+      if (0x20 > buf[i] || 0x7E < buf[i]) {
+        buf[i] = ' ';
+      }
     }
+  }
 }
 
 /*
  * \brief Helper function to convert cryptoauthlib return codes to
  * PKCS11 return codes
  */
-CK_RV pkcs11_util_convert_rv(ATCA_STATUS status)
-{
-    switch (status)
-    {
-    case ATCA_SUCCESS:
-        return CKR_OK;
-    default:
-        return CKR_FUNCTION_FAILED;
-    }
+CK_RV pkcs11_util_convert_rv(ATCA_STATUS status) {
+  switch (status) {
+  case ATCA_SUCCESS:
+    return CKR_OK;
+  default:
+    return CKR_FUNCTION_FAILED;
+  }
 }
-
 
 /** @} */

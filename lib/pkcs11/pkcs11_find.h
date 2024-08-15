@@ -53,10 +53,16 @@ extern "C" {
 }
 #endif
 
-CK_RV pkcs11_find_init(CK_SESSION_HANDLE hSession, CK_ATTRIBUTE_PTR pTemplate, CK_ULONG ulCount);
-CK_RV pkcs11_find_continue(CK_SESSION_HANDLE hSession, CK_OBJECT_HANDLE_PTR phObject, CK_ULONG ulMaxObjectCount, CK_ULONG_PTR pulObjectCount);
+CK_RV pkcs11_find_init(CK_SESSION_HANDLE hSession, CK_ATTRIBUTE_PTR pTemplate,
+                       CK_ULONG ulCount);
+CK_RV pkcs11_find_continue(CK_SESSION_HANDLE hSession,
+                           CK_OBJECT_HANDLE_PTR phObject,
+                           CK_ULONG ulMaxObjectCount,
+                           CK_ULONG_PTR pulObjectCount);
 CK_RV pkcs11_find_finish(CK_SESSION_HANDLE hSession);
 
-CK_RV pkcs11_find_get_attribute(CK_SESSION_HANDLE hSession, CK_OBJECT_HANDLE hObject, CK_ATTRIBUTE_PTR pTemplate, CK_ULONG ulCount);
+CK_RV pkcs11_find_get_attribute(CK_SESSION_HANDLE hSession,
+                                CK_OBJECT_HANDLE hObject,
+                                CK_ATTRIBUTE_PTR pTemplate, CK_ULONG ulCount);
 
 #endif /* PKCS11_FIND_H_ */

@@ -42,16 +42,15 @@
 #ifndef PKCS11_OS_H_
 #define PKCS11_OS_H_
 
-#include "cryptoki.h"
 #include "cryptoauthlib.h"
+#include "cryptoki.h"
 
 CK_RV pkcs11_os_create_mutex(CK_VOID_PTR_PTR ppMutex);
 CK_RV pkcs11_os_destroy_mutex(CK_VOID_PTR pMutex);
 CK_RV pkcs11_os_lock_mutex(CK_VOID_PTR pMutex);
 CK_RV pkcs11_os_unlock_mutex(CK_VOID_PTR pMutex);
 
-#define pkcs11_os_malloc    hal_malloc
-#define pkcs11_os_free      hal_free
+#define pkcs11_os_malloc hal_malloc
+#define pkcs11_os_free hal_free
 
 #endif /* PKCS11_OS_H_ */
-

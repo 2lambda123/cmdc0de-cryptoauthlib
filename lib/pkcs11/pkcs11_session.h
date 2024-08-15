@@ -50,34 +50,40 @@ extern "C" {
 #endif
 
 /** Session Context */
-typedef struct _pkcs11_session_ctx
-{
-    CK_BBOOL            initialized;
-    pkcs11_slot_ctx_ptr slot;
-    CK_SESSION_HANDLE   handle;
-    CK_STATE            state;
-    CK_ULONG            error;
-    CK_ATTRIBUTE_PTR    attrib_list;
-    CK_ULONG            attrib_count;
-    CK_ULONG            object_index;
-    CK_ULONG            object_count;
-    CK_OBJECT_HANDLE    active_object;
-    CK_BYTE             read_key[32];           /**< Accepted through C_Login as the user pin */
+typedef struct _pkcs11_session_ctx {
+  CK_BBOOL initialized;
+  pkcs11_slot_ctx_ptr slot;
+  CK_SESSION_HANDLE handle;
+  CK_STATE state;
+  CK_ULONG error;
+  CK_ATTRIBUTE_PTR attrib_list;
+  CK_ULONG attrib_count;
+  CK_ULONG object_index;
+  CK_ULONG object_count;
+  CK_OBJECT_HANDLE active_object;
+  CK_BYTE read_key[32]; /**< Accepted through C_Login as the user pin */
 } pkcs11_session_ctx, *pkcs11_session_ctx_ptr;
 
 #ifdef __cplusplus
 }
 #endif
-//pkcs11_session_ctx_ptr pkcs11_get_session_context(CK_SESSION_HANDLE hSession);
-CK_RV pkcs11_session_check(pkcs11_session_ctx_ptr * pSession, CK_SESSION_HANDLE hSession);
+// pkcs11_session_ctx_ptr pkcs11_get_session_context(CK_SESSION_HANDLE
+// hSession);
+CK_RV pkcs11_session_check(pkcs11_session_ctx_ptr *pSession,
+                           CK_SESSION_HANDLE hSession);
 
-CK_RV pkcs11_session_get_info(CK_SESSION_HANDLE hSession, CK_SESSION_INFO_PTR pInfo);
-CK_RV pkcs11_session_open(CK_SLOT_ID slotID, CK_FLAGS flags, CK_VOID_PTR pApplication, CK_NOTIFY notify, CK_SESSION_HANDLE_PTR phSession);
+CK_RV pkcs11_session_get_info(CK_SESSION_HANDLE hSession,
+                              CK_SESSION_INFO_PTR pInfo);
+CK_RV pkcs11_session_open(CK_SLOT_ID slotID, CK_FLAGS flags,
+                          CK_VOID_PTR pApplication, CK_NOTIFY notify,
+                          CK_SESSION_HANDLE_PTR phSession);
 CK_RV pkcs11_session_close(CK_SESSION_HANDLE hSession);
 CK_RV pkcs11_session_closeall(CK_SLOT_ID slotID);
 
-CK_RV pkcs11_session_login(CK_SESSION_HANDLE hSession, CK_USER_TYPE userType, CK_UTF8CHAR_PTR pPin, CK_ULONG ulPinLen);
+CK_RV pkcs11_session_login(CK_SESSION_HANDLE hSession, CK_USER_TYPE userType,
+                           CK_UTF8CHAR_PTR pPin, CK_ULONG ulPinLen);
 CK_RV pkcs11_session_logout(CK_SESSION_HANDLE hSession);
-CK_RV pkcs11_session_authorize(pkcs11_session_ctx_ptr pSession, CK_VOID_PTR pObject);
+CK_RV pkcs11_session_authorize(pkcs11_session_ctx_ptr pSession,
+                               CK_VOID_PTR pObject);
 
 #endif /* PKCS11_SESSION_H_ */

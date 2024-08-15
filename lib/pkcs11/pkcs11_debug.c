@@ -29,18 +29,17 @@
  * TERMS.
  */
 
-#include "pkcs11_config.h"
 #include "pkcs11_debug.h"
+#include "pkcs11_config.h"
 
 #if PKCS11_DEBUG_ENABLE
 
 /* Macro to convert constant to a table entry */
-#define C2TE(x)     { x, #x }
+#define C2TE(x) {x, #x}
 
-typedef struct
-{
-    CK_ULONG    value;
-    CK_CHAR_PTR name;
+typedef struct {
+  CK_ULONG value;
+  CK_CHAR_PTR name;
 } pkcs11_debug_lookup_t;
 
 static const pkcs11_debug_lookup_t pkcs11_debug_cko_names[] = {
@@ -53,9 +52,9 @@ static const pkcs11_debug_lookup_t pkcs11_debug_cko_names[] = {
     C2TE(CKO_DOMAIN_PARAMETERS),
     C2TE(CKO_MECHANISM),
     C2TE(CKO_OTP_KEY),
-    C2TE(CKO_VENDOR_DEFINED)
-};
-static const size_t pkcs11_debug_cko_names_count = sizeof(pkcs11_debug_cko_names) / sizeof(pkcs11_debug_lookup_t);
+    C2TE(CKO_VENDOR_DEFINED)};
+static const size_t pkcs11_debug_cko_names_count =
+    sizeof(pkcs11_debug_cko_names) / sizeof(pkcs11_debug_lookup_t);
 
 static const pkcs11_debug_lookup_t pkcs11_debug_cka_names[] = {
     C2TE(CKA_CLASS),
@@ -164,10 +163,10 @@ static const pkcs11_debug_lookup_t pkcs11_debug_cka_names[] = {
     C2TE(CKA_DEFAULT_CMS_ATTRIBUTES),
     C2TE(CKA_SUPPORTED_CMS_ATTRIBUTES),
     C2TE(CKA_ALLOWED_MECHANISMS),
-    C2TE(CKA_VENDOR_DEFINED)
-};
+    C2TE(CKA_VENDOR_DEFINED)};
 
-static const size_t pkcs11_debug_cka_names_count = sizeof(pkcs11_debug_cka_names) / sizeof(pkcs11_debug_lookup_t);
+static const size_t pkcs11_debug_cka_names_count =
+    sizeof(pkcs11_debug_cka_names) / sizeof(pkcs11_debug_lookup_t);
 
 static const pkcs11_debug_lookup_t pkcs11_debug_ckr_names[] = {
     C2TE(CKR_OK),
@@ -264,60 +263,62 @@ static const pkcs11_debug_lookup_t pkcs11_debug_ckr_names[] = {
     C2TE(CKR_PIN_TOO_WEAK),
     C2TE(CKR_PUBLIC_KEY_INVALID),
     C2TE(CKR_FUNCTION_REJECTED),
-    C2TE(CKR_VENDOR_DEFINED)
-};
-static const size_t pkcs11_debug_ckr_names_count = sizeof(pkcs11_debug_ckr_names) / sizeof(pkcs11_debug_lookup_t);
+    C2TE(CKR_VENDOR_DEFINED)};
+static const size_t pkcs11_debug_ckr_names_count =
+    sizeof(pkcs11_debug_ckr_names) / sizeof(pkcs11_debug_lookup_t);
 
-const char * pkcs11_debug_get_name(const CK_ULONG value, const pkcs11_debug_lookup_t* table, const size_t size)
-{
-    int i;
-    char * rv = NULL;
+const char *pkcs11_debug_get_name(const CK_ULONG value,
+                                  const pkcs11_debug_lookup_t *table,
+                                  const size_t size) {
+  int i;
+  char *rv = NULL;
 
-    for (i = 0; (size > i) && (NULL == rv); i++)
-    {
-        if (value == table[i].value)
-        {
-            rv = (char*)table[i].name;
-        }
+  for (i = 0; (size > i) && (NULL == rv); i++) {
+    if (value == table[i].value) {
+      rv = (char *)table[i].name;
     }
+  }
 
-    if (NULL == rv)
-    {
-        rv = "";
-    }
+  if (NULL == rv) {
+    rv = "";
+  }
 
-    return rv;
+  return rv;
 }
 
-void pkcs11_debug_attributes(CK_ATTRIBUTE_PTR pTemplate, CK_ULONG ulCount)
-{
-    int i;
+void pkcs11_debug_attributes(CK_ATTRIBUTE_PTR pTemplate, CK_ULONG ulCount) {
+  int i;
 
-    for (i = 0; i < ulCount && pTemplate; i++, pTemplate++)
-    {
-        const char * name = pkcs11_debug_get_name(pTemplate->type, pkcs11_debug_cka_names, pkcs11_debug_cka_names_count);
-        switch (pTemplate->type)
-        {
-        case CKA_CLASS:
-        {
-            unsigned int object_id = *((CK_OBJECT_CLASS*)pTemplate->pValue);
-            const char * object_name = pkcs11_debug_get_name(object_id, pkcs11_debug_cko_names, pkcs11_debug_cko_names_count);
-            PKCS11_DEBUG_NOFILE("%s(%X):%d:%s(%x)\r\n", name, (unsigned int)pTemplate->type, (int)pTemplate->ulValueLen, object_name, object_id);
-            break;
-        }
-        case CKA_LABEL:
-            PKCS11_DEBUG_NOFILE("%s(%X):%d:%s\r\n", name, (unsigned int)pTemplate->type, (int)pTemplate->ulValueLen, (char*)pTemplate->pValue);
-            break;
-        default:
-            PKCS11_DEBUG_NOFILE("%s(%X):%d:%p:\r\n", name, (unsigned int)pTemplate->type, (int)pTemplate->ulValueLen, pTemplate->pValue);
-            break;
-        }
+  for (i = 0; i < ulCount && pTemplate; i++, pTemplate++) {
+    const char *name = pkcs11_debug_get_name(
+        pTemplate->type, pkcs11_debug_cka_names, pkcs11_debug_cka_names_count);
+    switch (pTemplate->type) {
+    case CKA_CLASS: {
+      unsigned int object_id = *((CK_OBJECT_CLASS *)pTemplate->pValue);
+      const char *object_name = pkcs11_debug_get_name(
+          object_id, pkcs11_debug_cko_names, pkcs11_debug_cko_names_count);
+      PKCS11_DEBUG_NOFILE("%s(%X):%d:%s(%x)\r\n", name,
+                          (unsigned int)pTemplate->type,
+                          (int)pTemplate->ulValueLen, object_name, object_id);
+      break;
     }
+    case CKA_LABEL:
+      PKCS11_DEBUG_NOFILE(
+          "%s(%X):%d:%s\r\n", name, (unsigned int)pTemplate->type,
+          (int)pTemplate->ulValueLen, (char *)pTemplate->pValue);
+      break;
+    default:
+      PKCS11_DEBUG_NOFILE("%s(%X):%d:%p:\r\n", name,
+                          (unsigned int)pTemplate->type,
+                          (int)pTemplate->ulValueLen, pTemplate->pValue);
+      break;
+    }
+  }
 }
 
-const char * pkcs11_debug_get_ckr_name(CK_RV rv)
-{
-    return pkcs11_debug_get_name(rv, pkcs11_debug_ckr_names, pkcs11_debug_ckr_names_count);
+const char *pkcs11_debug_get_ckr_name(CK_RV rv) {
+  return pkcs11_debug_get_name(rv, pkcs11_debug_ckr_names,
+                               pkcs11_debug_ckr_names_count);
 }
 
 #endif
