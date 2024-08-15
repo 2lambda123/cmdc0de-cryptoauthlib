@@ -51,22 +51,25 @@ extern "C" {
 /** Populate an attribute based on the "object" */
 typedef CK_RV (*attrib_f)(CK_VOID_PTR pObject, CK_ATTRIBUTE_PTR pAttribute);
 
-typedef struct _pkcs11_attrib_model
-{
-    const CK_ATTRIBUTE_TYPE type;
-    const attrib_f          func;
+typedef struct _pkcs11_attrib_model {
+  const CK_ATTRIBUTE_TYPE type;
+  const attrib_f func;
 } pkcs11_attrib_model, *pkcs11_attrib_model_ptr;
 
 #ifdef __cplusplus
 }
 #endif
 
-CK_RV pkcs11_attrib_fill(CK_ATTRIBUTE_PTR pAttribute, const CK_VOID_PTR pData, const CK_ULONG ulSize);
-CK_RV pkcs11_attrib_value(CK_ATTRIBUTE_PTR pAttribute, const CK_ULONG ulValue, const CK_ULONG ulSize);
+CK_RV pkcs11_attrib_fill(CK_ATTRIBUTE_PTR pAttribute, const CK_VOID_PTR pData,
+                         const CK_ULONG ulSize);
+CK_RV pkcs11_attrib_value(CK_ATTRIBUTE_PTR pAttribute, const CK_ULONG ulValue,
+                          const CK_ULONG ulSize);
 
-CK_RV pkcs11_attrib_false(const CK_VOID_PTR pObject, CK_ATTRIBUTE_PTR pAttribute);
-CK_RV pkcs11_attrib_true(const CK_VOID_PTR pObject, CK_ATTRIBUTE_PTR pAttribute);
-CK_RV pkcs11_attrib_empty(const CK_VOID_PTR pObject, CK_ATTRIBUTE_PTR pAttribute);
-
+CK_RV pkcs11_attrib_false(const CK_VOID_PTR pObject,
+                          CK_ATTRIBUTE_PTR pAttribute);
+CK_RV pkcs11_attrib_true(const CK_VOID_PTR pObject,
+                         CK_ATTRIBUTE_PTR pAttribute);
+CK_RV pkcs11_attrib_empty(const CK_VOID_PTR pObject,
+                          CK_ATTRIBUTE_PTR pAttribute);
 
 #endif /* PKCS11_ATTRIB_H_ */

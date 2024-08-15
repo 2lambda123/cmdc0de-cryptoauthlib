@@ -50,18 +50,17 @@ extern "C" {
 #endif
 
 /** Library Context */
-typedef struct _pkcs11_lib_ctx
-{
-    CK_BBOOL        initialized;
-    CK_CREATEMUTEX  create_mutex;
-    CK_DESTROYMUTEX destroy_mutex;
-    CK_LOCKMUTEX    lock_mutex;
-    CK_UNLOCKMUTEX  unlock_mutex;
-    CK_VOID_PTR     mutex;
-    CK_VOID_PTR     slots;
-    CK_ULONG        slot_cnt;
+typedef struct _pkcs11_lib_ctx {
+  CK_BBOOL initialized;
+  CK_CREATEMUTEX create_mutex;
+  CK_DESTROYMUTEX destroy_mutex;
+  CK_LOCKMUTEX lock_mutex;
+  CK_UNLOCKMUTEX unlock_mutex;
+  CK_VOID_PTR mutex;
+  CK_VOID_PTR slots;
+  CK_ULONG slot_cnt;
 #if !PKCS11_USE_STATIC_CONFIG
-    CK_CHAR config_path[200];
+  CK_CHAR config_path[200];
 #endif
 } pkcs11_lib_ctx, *pkcs11_lib_ctx_ptr;
 
@@ -71,7 +70,7 @@ typedef struct _pkcs11_lib_ctx
 
 CK_RV pkcs11_init(CK_C_INITIALIZE_ARGS_PTR pInitArgs);
 CK_RV pkcs11_deinit(CK_VOID_PTR pReserved);
-CK_RV pkcs11_init_check(pkcs11_lib_ctx_ptr * ppContext, CK_BBOOL lock);
+CK_RV pkcs11_init_check(pkcs11_lib_ctx_ptr *ppContext, CK_BBOOL lock);
 
 pkcs11_lib_ctx_ptr pkcs11_get_context(void);
 CK_RV pkcs11_lock_context(pkcs11_lib_ctx_ptr pContext);

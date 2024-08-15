@@ -52,9 +52,14 @@ extern "C" {
 }
 #endif
 
-CK_RV pkcs11_digest_init(CK_SESSION_HANDLE hSession, CK_MECHANISM_PTR pMechanism);
-CK_RV pkcs11_digest(CK_SESSION_HANDLE hSession, CK_BYTE_PTR pData, CK_ULONG ulDataLen, CK_BYTE_PTR pDigest, CK_ULONG_PTR pulDigestLen);
-CK_RV pkcs11_digest_update(CK_SESSION_HANDLE hSession, CK_BYTE_PTR pPart, CK_ULONG ulPartLen);
-CK_RV pkcs11_digest_final(CK_SESSION_HANDLE hSession, CK_BYTE_PTR pDigest, CK_ULONG_PTR pulDigestLen);
+CK_RV pkcs11_digest_init(CK_SESSION_HANDLE hSession,
+                         CK_MECHANISM_PTR pMechanism);
+CK_RV pkcs11_digest(CK_SESSION_HANDLE hSession, CK_BYTE_PTR pData,
+                    CK_ULONG ulDataLen, CK_BYTE_PTR pDigest,
+                    CK_ULONG_PTR pulDigestLen);
+CK_RV pkcs11_digest_update(CK_SESSION_HANDLE hSession, CK_BYTE_PTR pPart,
+                           CK_ULONG ulPartLen);
+CK_RV pkcs11_digest_final(CK_SESSION_HANDLE hSession, CK_BYTE_PTR pDigest,
+                          CK_ULONG_PTR pulDigestLen);
 
 #endif /* PKCS11_DIGEST_H_ */

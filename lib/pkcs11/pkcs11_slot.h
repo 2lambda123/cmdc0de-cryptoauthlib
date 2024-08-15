@@ -42,23 +42,22 @@
 #ifndef PKCS11_SLOT_H_
 #define PKCS11_SLOT_H_
 
-//#include "pkcs11_config.h"
-#include "pkcs11_init.h"
+// #include "pkcs11_config.h"
 #include "cryptoauthlib.h"
+#include "pkcs11_init.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
 /** Slot Context */
-typedef struct _pkcs11_slot_ctx
-{
-    CK_BBOOL           initialized;
-    CK_SLOT_ID         slot_id;
-    ATCAIfaceCfg*      interface_config;
-    CK_SESSION_HANDLE  session;
-    atecc608a_config_t cfg_zone;
-    CK_FLAGS           flags;
+typedef struct _pkcs11_slot_ctx {
+  CK_BBOOL initialized;
+  CK_SLOT_ID slot_id;
+  ATCAIfaceCfg *interface_config;
+  CK_SESSION_HANDLE session;
+  atecc608a_config_t cfg_zone;
+  CK_FLAGS flags;
 } pkcs11_slot_ctx, *pkcs11_slot_ctx_ptr;
 
 #ifdef __cplusplus
@@ -68,10 +67,11 @@ typedef struct _pkcs11_slot_ctx
 CK_RV pkcs11_slot_init(CK_SLOT_ID slotID);
 CK_RV pkcs11_slot_config(CK_SLOT_ID slotID);
 CK_VOID_PTR pkcs11_slot_initslots(CK_ULONG pulCount);
-pkcs11_slot_ctx_ptr pkcs11_slot_get_context(pkcs11_lib_ctx_ptr lib_ctx, CK_SLOT_ID slotID);
+pkcs11_slot_ctx_ptr pkcs11_slot_get_context(pkcs11_lib_ctx_ptr lib_ctx,
+                                            CK_SLOT_ID slotID);
 
-
-CK_RV pkcs11_slot_get_list(CK_BBOOL tokenPresent, CK_SLOT_ID_PTR pSlotList, CK_ULONG_PTR pulCount);
+CK_RV pkcs11_slot_get_list(CK_BBOOL tokenPresent, CK_SLOT_ID_PTR pSlotList,
+                           CK_ULONG_PTR pulCount);
 CK_RV pkcs11_slot_get_info(CK_SLOT_ID slotID, CK_SLOT_INFO_PTR pInfo);
 
 #endif /* PKCS11_SLOT_H_ */

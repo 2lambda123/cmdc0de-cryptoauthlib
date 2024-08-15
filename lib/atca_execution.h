@@ -32,14 +32,13 @@
  * THIS SOFTWARE.
  */
 
-
 #ifndef ATCA_EXECUTION_H
 #define ATCA_EXECUTION_H
 
-#include "atca_config.h"
-#include "atca_status.h"
 #include "atca_command.h"
+#include "atca_config.h"
 #include "atca_device.h"
+#include "atca_status.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -51,19 +50,17 @@ extern "C" {
 /** \brief Structure to hold the device execution time and the opcode for the
  *         corresponding command
  */
-typedef struct
-{
-    uint8_t  opcode;
-    uint16_t execution_time_msec;
+typedef struct {
+  uint8_t opcode;
+  uint16_t execution_time_msec;
 } device_execution_time_t;
 
 ATCA_STATUS atGetExecTime(uint8_t opcode, ATCACommand ca_cmd);
 #endif
 
-ATCA_STATUS atca_execute_command(ATCAPacket* packet, ATCADevice device);
+ATCA_STATUS atca_execute_command(ATCAPacket *packet, ATCADevice device);
 
 #ifdef __cplusplus
 }
 #endif
 #endif
-

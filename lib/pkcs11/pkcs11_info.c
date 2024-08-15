@@ -29,12 +29,12 @@
  * TERMS.
  */
 
+#include "cryptoauthlib.h"
 #include "pkcs11_config.h"
 #include "pkcs11_init.h"
-#include "pkcs11_slot.h"
 #include "pkcs11_session.h"
+#include "pkcs11_slot.h"
 #include "pkcs11_util.h"
-#include "cryptoauthlib.h"
 
 #include <stdio.h>
 
@@ -48,40 +48,41 @@ const char pkcs11_lib_description[] = "Cryptoauthlib PKCS11 Interface";
 /**
  * \brief Obtains general information about Cryptoki
  */
-CK_RV pkcs11_get_lib_info(CK_INFO_PTR pInfo)
-{
-    pkcs11_lib_ctx_ptr ctx = pkcs11_get_context();
+CK_RV pkcs11_get_lib_info(CK_INFO_PTR pInfo) {
+  pkcs11_lib_ctx_ptr ctx = pkcs11_get_context();
 
-    if (!ctx || !ctx->initialized)
-    {
-        return CKR_CRYPTOKI_NOT_INITIALIZED;
-    }
+  if (!ctx || !ctx->initialized) {
+    return CKR_CRYPTOKI_NOT_INITIALIZED;
+  }
 
-    if (!pInfo)
-    {
-        return CKR_ARGUMENTS_BAD;
-    }
+  if (!pInfo) {
+    return CKR_ARGUMENTS_BAD;
+  }
 
-    /* Must be zero for 2.40 */
-    pInfo->flags = 0;
+  /* Must be zero for 2.40 */
+  pInfo->flags = 0;
 
-    /* PKCS11 Specification Version */
-    pInfo->cryptokiVersion.major = CRYPTOKI_VERSION_MAJOR;
-    pInfo->cryptokiVersion.minor = CRYPTOKI_VERSION_MINOR;
+  /* PKCS11 Specification Version */
+  pInfo->cryptokiVersion.major = CRYPTOKI_VERSION_MAJOR;
+  pInfo->cryptokiVersion.minor = CRYPTOKI_VERSION_MINOR;
 
-    /* Cryptoauthlib Version */
-    pInfo->libraryVersion.major = ATCA_LIB_VER_MAJOR;
-    pInfo->libraryVersion.minor = ATCA_LIB_VER_MINOR;
+  /* Cryptoauthlib Version */
+  pInfo->libraryVersion.major = ATCA_LIB_VER_MAJOR;
+  pInfo->libraryVersion.minor = ATCA_LIB_VER_MINOR;
 
-    /* Set up the identifier strings */
-    snprintf((char*)pInfo->manufacturerID, sizeof(pInfo->manufacturerID), pkcs11_lib_manufacturer_id);
-    snprintf((char*)pInfo->libraryDescription, sizeof(pInfo->libraryDescription), pkcs11_lib_description);
+  /* Set up the identifier strings */
+  snprintf((char *)pInfo->manufacturerID, sizeof(pInfo->manufacturerID),
+           pkcs11_lib_manufacturer_id);
+  snprintf((char *)pInfo->libraryDescription, sizeof(pInfo->libraryDescription),
+           pkcs11_lib_description);
 
-    /* Make sure strings are escaped properly */
-    pkcs11_util_escape_string(pInfo->manufacturerID, sizeof(pInfo->manufacturerID));
-    pkcs11_util_escape_string(pInfo->libraryDescription, sizeof(pInfo->libraryDescription));
+  /* Make sure strings are escaped properly */
+  pkcs11_util_escape_string(pInfo->manufacturerID,
+                            sizeof(pInfo->manufacturerID));
+  pkcs11_util_escape_string(pInfo->libraryDescription,
+                            sizeof(pInfo->libraryDescription));
 
-    return CKR_OK;
+  return CKR_OK;
 }
 
 /** @} */

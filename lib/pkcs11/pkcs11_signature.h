@@ -52,13 +52,27 @@ extern "C" {
 }
 #endif
 
-CK_RV pkcs11_signature_sign_init(CK_SESSION_HANDLE hSession, CK_MECHANISM_PTR pMechanism, CK_OBJECT_HANDLE hKey);
-CK_RV pkcs11_signature_sign(CK_SESSION_HANDLE hSession, CK_BYTE_PTR pData, CK_ULONG ulDataLen, CK_BYTE_PTR pSignature, CK_ULONG_PTR pulSignatureLen);
-CK_RV pkcs11_signature_sign_continue(CK_SESSION_HANDLE hSession, CK_BYTE_PTR pPart, CK_ULONG ulPartLen);
-CK_RV pkcs11_signature_sign_finish(CK_SESSION_HANDLE hSession, CK_BYTE_PTR pSignature, CK_ULONG_PTR pulSignatureLen);
-CK_RV pkcs11_signature_verify_init(CK_SESSION_HANDLE hSession, CK_MECHANISM_PTR pMechanism, CK_OBJECT_HANDLE hKey);
-CK_RV pkcs11_signature_verify(CK_SESSION_HANDLE hSession, CK_BYTE_PTR pData, CK_ULONG ulDataLen, CK_BYTE_PTR pSignature, CK_ULONG ulSignatureLen);
-CK_RV pkcs11_signature_verify_continue(CK_SESSION_HANDLE hSession, CK_BYTE_PTR pPart, CK_ULONG ulPartLen);
-CK_RV pkcs11_signature_verify_finish(CK_SESSION_HANDLE hSession, CK_BYTE_PTR pSignature, CK_ULONG ulSignatureLen);
+CK_RV pkcs11_signature_sign_init(CK_SESSION_HANDLE hSession,
+                                 CK_MECHANISM_PTR pMechanism,
+                                 CK_OBJECT_HANDLE hKey);
+CK_RV pkcs11_signature_sign(CK_SESSION_HANDLE hSession, CK_BYTE_PTR pData,
+                            CK_ULONG ulDataLen, CK_BYTE_PTR pSignature,
+                            CK_ULONG_PTR pulSignatureLen);
+CK_RV pkcs11_signature_sign_continue(CK_SESSION_HANDLE hSession,
+                                     CK_BYTE_PTR pPart, CK_ULONG ulPartLen);
+CK_RV pkcs11_signature_sign_finish(CK_SESSION_HANDLE hSession,
+                                   CK_BYTE_PTR pSignature,
+                                   CK_ULONG_PTR pulSignatureLen);
+CK_RV pkcs11_signature_verify_init(CK_SESSION_HANDLE hSession,
+                                   CK_MECHANISM_PTR pMechanism,
+                                   CK_OBJECT_HANDLE hKey);
+CK_RV pkcs11_signature_verify(CK_SESSION_HANDLE hSession, CK_BYTE_PTR pData,
+                              CK_ULONG ulDataLen, CK_BYTE_PTR pSignature,
+                              CK_ULONG ulSignatureLen);
+CK_RV pkcs11_signature_verify_continue(CK_SESSION_HANDLE hSession,
+                                       CK_BYTE_PTR pPart, CK_ULONG ulPartLen);
+CK_RV pkcs11_signature_verify_finish(CK_SESSION_HANDLE hSession,
+                                     CK_BYTE_PTR pSignature,
+                                     CK_ULONG ulSignatureLen);
 
 #endif /* PKCS11_SIGNATURE_H_ */

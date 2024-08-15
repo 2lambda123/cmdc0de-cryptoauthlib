@@ -40,45 +40,41 @@
  * \brief Convert HAL return codes to PKCS11 return values
  * \param[IN] status Code returned by hal call
  */
-static CK_RV pkcs11_os_convert_rv(ATCA_STATUS status)
-{
-    return (ATCA_FUNC_FAIL == status) ? CKR_CANT_LOCK : pkcs11_util_convert_rv(status);
+static CK_RV pkcs11_os_convert_rv(ATCA_STATUS status) {
+  return (ATCA_FUNC_FAIL == status) ? CKR_CANT_LOCK
+                                    : pkcs11_util_convert_rv(status);
 }
 
 /**
  * \brief Application callback for creating a mutex object
  * \param[IN/OUT] ppMutex location to receive ptr to mutex
  */
-CK_RV pkcs11_os_create_mutex(CK_VOID_PTR_PTR ppMutex)
-{
-    return pkcs11_os_convert_rv(hal_create_mutex(ppMutex, "atpkcs11"));
+CK_RV pkcs11_os_create_mutex(CK_VOID_PTR_PTR ppMutex) {
+  return pkcs11_os_convert_rv(hal_create_mutex(ppMutex, "atpkcs11"));
 }
 
 /*
  * \brief Application callback for destroying a mutex object
  * \param[IN] pMutex pointer to mutex
  */
-CK_RV pkcs11_os_destroy_mutex(CK_VOID_PTR pMutex)
-{
-    return pkcs11_os_convert_rv(hal_destroy_mutex(pMutex));
+CK_RV pkcs11_os_destroy_mutex(CK_VOID_PTR pMutex) {
+  return pkcs11_os_convert_rv(hal_destroy_mutex(pMutex));
 }
 
 /*
  * \brief Application callback for locking a mutex
  * \param[IN] pMutex pointer to mutex
  */
-CK_RV pkcs11_os_lock_mutex(CK_VOID_PTR pMutex)
-{
-    return pkcs11_os_convert_rv(hal_lock_mutex(pMutex));
+CK_RV pkcs11_os_lock_mutex(CK_VOID_PTR pMutex) {
+  return pkcs11_os_convert_rv(hal_lock_mutex(pMutex));
 }
 
 /*
  * \brief Application callback for unlocking a mutex
  * \param[IN] pMutex pointer to mutex
  */
-CK_RV pkcs11_os_unlock_mutex(CK_VOID_PTR pMutex)
-{
-    return pkcs11_os_convert_rv(hal_unlock_mutex(pMutex));
+CK_RV pkcs11_os_unlock_mutex(CK_VOID_PTR pMutex) {
+  return pkcs11_os_convert_rv(hal_unlock_mutex(pMutex));
 }
 
 /** @} */
