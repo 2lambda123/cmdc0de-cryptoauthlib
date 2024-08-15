@@ -55,7 +55,7 @@ typedef struct
 {
     uint8_t  opcode;
     uint16_t execution_time_msec;
-}device_execution_time_t;
+} device_execution_time_t;
 
 ATCA_STATUS atGetExecTime(uint8_t opcode, ATCACommand ca_cmd);
 #endif

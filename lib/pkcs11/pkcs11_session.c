@@ -153,7 +153,7 @@ CK_RV pkcs11_session_open(
     CK_VOID_PTR           pApplication,
     CK_NOTIFY             notify,
     CK_SESSION_HANDLE_PTR phSession
-    )
+)
 {
     pkcs11_lib_ctx_ptr lib_ctx = pkcs11_get_context();
     pkcs11_slot_ctx_ptr slot_ctx;
@@ -485,11 +485,11 @@ CK_RV pkcs11_session_authorize(pkcs11_session_ctx_ptr pSession, CK_VOID_PTR pObj
         /* Perform CheckMac which will compare the host provided
          * mac against the internally computed one */
         status = atcab_checkmac(
-            checkmac_params.mode,
-            checkmac_params.key_id,
-            checkmac_params.client_chal,
-            checkmac_params.client_resp,
-            checkmac_params.other_data);
+                     checkmac_params.mode,
+                     checkmac_params.key_id,
+                     checkmac_params.client_chal,
+                     checkmac_params.client_resp,
+                     checkmac_params.other_data);
     }
 
     if (ATCA_SUCCESS == status)

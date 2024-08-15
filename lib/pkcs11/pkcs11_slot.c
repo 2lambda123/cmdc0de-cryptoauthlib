@@ -178,14 +178,14 @@ CK_RV pkcs11_slot_init(CK_SLOT_ID slotID)
     {
         ATCAIfaceCfg * ifacecfg = (ATCAIfaceCfg*)slot_ctx->interface_config;
 
-    #if !(PKCS11_508_SUPPORT && PKCS11_608_SUPPORT)
+#if !(PKCS11_508_SUPPORT && PKCS11_608_SUPPORT)
         /* If only one option is supported */
-        #if PKCS11_508_SUPPORT
+#if PKCS11_508_SUPPORT
         ifacecfg->devtype = ATECC508A;
-        #else
+#else
         ifacecfg->devtype = ATECC608A;
-        #endif
-    #endif
+#endif
+#endif
 
         retries = 2;
         do
@@ -197,7 +197,7 @@ CK_RV pkcs11_slot_init(CK_SLOT_ID slotID)
         }
         while (retries-- && status);
 
-    #ifdef ATCA_HAL_I2C
+#ifdef ATCA_HAL_I2C
         if (ATCA_SUCCESS != status)
         {
             if (0xC0 != ifacecfg->atcai2c.slave_address)
@@ -215,15 +215,15 @@ CK_RV pkcs11_slot_init(CK_SLOT_ID slotID)
                 while (retries-- && status);
             }
         }
-    #endif
+#endif
 
-    #if PKCS11_508_SUPPORT && PKCS11_608_SUPPORT
+#if PKCS11_508_SUPPORT && PKCS11_608_SUPPORT
         /* If both are supported check the device to verify */
         if (ATCA_SUCCESS == status)
         {
             status = pkcs11_slot_check_device_type(ifacecfg);
         }
-    #endif
+#endif
 
         if (ATCA_SUCCESS == status)
         {

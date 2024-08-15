@@ -83,7 +83,7 @@ const atcacert_def_t g_cert_def_1_signer = {
     .chain_id               = 0,
     .private_key_slot       = 0,
     .sn_source              = SNSRC_STORED,
-    .cert_sn_dev_loc        = { 
+    .cert_sn_dev_loc        = {
         .zone      = DEVZONE_DATA,
         .slot      = 14,
         .is_genkey = 0,
@@ -112,35 +112,35 @@ const atcacert_def_t g_cert_def_1_signer = {
         .count     = 72
     },
     .std_cert_elements      = {
-        { // STDCERT_PUBLIC_KEY
+        {   // STDCERT_PUBLIC_KEY
             .offset = 206,
             .count  = 64
         },
-        { // STDCERT_SIGNATURE
+        {   // STDCERT_SIGNATURE
             .offset = 386,
             .count  = 74
         },
-        { // STDCERT_ISSUE_DATE
+        {   // STDCERT_ISSUE_DATE
             .offset = 97,
             .count  = 13
         },
-        { // STDCERT_EXPIRE_DATE
+        {   // STDCERT_EXPIRE_DATE
             .offset = 112,
             .count  = 13
         },
-        { // STDCERT_SIGNER_ID
+        {   // STDCERT_SIGNER_ID
             .offset = 175,
             .count  = 4
         },
-        { // STDCERT_CERT_SN
+        {   // STDCERT_CERT_SN
             .offset = 15,
             .count  = 16
         },
-        { // STDCERT_AUTH_KEY_ID
+        {   // STDCERT_AUTH_KEY_ID
             .offset = 354,
             .count  = 20
         },
-        { // STDCERT_SUBJ_KEY_ID
+        {   // STDCERT_SUBJ_KEY_ID
             .offset = 321,
             .count  = 20
         }
@@ -188,7 +188,7 @@ const atcacert_def_t g_cert_def_2_device = {
     .chain_id               = 0,
     .private_key_slot       = 0,
     .sn_source              = SNSRC_PUB_KEY_HASH,
-    .cert_sn_dev_loc        = { 
+    .cert_sn_dev_loc        = {
         .zone      = DEVZONE_NONE,
         .slot      = 0,
         .is_genkey = 0,
@@ -217,35 +217,35 @@ const atcacert_def_t g_cert_def_2_device = {
         .count     = 72
     },
     .std_cert_elements      = {
-        { // STDCERT_PUBLIC_KEY
+        {   // STDCERT_PUBLIC_KEY
             .offset = 207,
             .count  = 64
         },
-        { // STDCERT_SIGNATURE
+        {   // STDCERT_SIGNATURE
             .offset = 351,
             .count  = 75
         },
-        { // STDCERT_ISSUE_DATE
+        {   // STDCERT_ISSUE_DATE
             .offset = 101,
             .count  = 13
         },
-        { // STDCERT_EXPIRE_DATE
+        {   // STDCERT_EXPIRE_DATE
             .offset = 0,
             .count  = 0
         },
-        { // STDCERT_SIGNER_ID
+        {   // STDCERT_SIGNER_ID
             .offset = 93,
             .count  = 4
         },
-        { // STDCERT_CERT_SN
+        {   // STDCERT_CERT_SN
             .offset = 15,
             .count  = 16
         },
-        { // STDCERT_AUTH_KEY_ID
+        {   // STDCERT_AUTH_KEY_ID
             .offset = 319,
             .count  = 20
         },
-        { // STDCERT_SUBJ_KEY_ID
+        {   // STDCERT_SUBJ_KEY_ID
             .offset = 286,
             .count  = 20
         }

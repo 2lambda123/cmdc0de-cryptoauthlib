@@ -95,11 +95,11 @@ int atcacert_read_device_loc(const atcacert_device_loc_t* device_loc,
         }
 
         ret = atcab_read_bytes_zone(
-            device_loc->zone,
-            device_loc->slot,
-            device_loc->offset,
-            data,
-            count);
+                  device_loc->zone,
+                  device_loc->slot,
+                  device_loc->offset,
+                  data,
+                  count);
         if (ret != ATCA_SUCCESS)
         {
             return ret;
@@ -126,11 +126,11 @@ int atcacert_read_cert(const atcacert_def_t* cert_def,
     }
 
     ret = atcacert_get_device_locs(
-        cert_def,
-        device_locs,
-        &device_locs_count,
-        sizeof(device_locs) / sizeof(device_locs[0]),
-        ATCA_BLOCK_SIZE);
+              cert_def,
+              device_locs,
+              &device_locs_count,
+              sizeof(device_locs) / sizeof(device_locs[0]),
+              ATCA_BLOCK_SIZE);
     if (ret != ATCACERT_E_SUCCESS)
     {
         return ret;
@@ -182,11 +182,11 @@ int atcacert_write_cert(const atcacert_def_t* cert_def,
     }
 
     ret = atcacert_get_device_locs(
-        cert_def,
-        device_locs,
-        &device_locs_count,
-        sizeof(device_locs) / sizeof(device_locs[0]),
-        ATCA_BLOCK_SIZE);
+              cert_def,
+              device_locs,
+              &device_locs_count,
+              sizeof(device_locs) / sizeof(device_locs[0]),
+              ATCA_BLOCK_SIZE);
     if (ret != ATCACERT_E_SUCCESS)
     {
         return ret;
@@ -219,12 +219,12 @@ int atcacert_write_cert(const atcacert_def_t* cert_def,
         for (block = start_block; block <= end_block; block++)
         {
             ret = atcab_write_zone(
-                device_locs[i].zone,
-                device_locs[i].slot,
-                (uint8_t)block,
-                0,
-                &data[(block - start_block) * ATCA_BLOCK_SIZE],
-                ATCA_BLOCK_SIZE);
+                      device_locs[i].zone,
+                      device_locs[i].slot,
+                      (uint8_t)block,
+                      0,
+                      &data[(block - start_block) * ATCA_BLOCK_SIZE],
+                      ATCA_BLOCK_SIZE);
             if (ret != ATCA_SUCCESS)
             {
                 return ret;

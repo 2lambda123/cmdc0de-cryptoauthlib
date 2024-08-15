@@ -628,8 +628,8 @@ CK_RV pkcs11_key_generate_pair
     }
 
     if (!pMechanism || !pPublicKeyTemplate || !ulPublicKeyAttributeCount ||
-        !pPrivateKeyTemplate || !ulPrivateKeyAttributeCount ||
-        !phPublicKey || !phPrivateKey)
+            !pPrivateKeyTemplate || !ulPrivateKeyAttributeCount ||
+            !phPublicKey || !phPrivateKey)
     {
         return CKR_ARGUMENTS_BAD;
     }

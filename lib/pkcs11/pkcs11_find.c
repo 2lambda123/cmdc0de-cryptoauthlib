@@ -401,7 +401,7 @@ CK_RV pkcs11_find_get_attribute(CK_SESSION_HANDLE hSession, CK_OBJECT_HANDLE hOb
     for (i = 0; i < ulCount; i++)
     {
         pkcs11_attrib_model_ptr pAttribute = pkcs11_find_attrib((const pkcs11_attrib_model_ptr)pObject->attributes,
-                                                                pObject->count, &pTemplate[i]);
+                                             pObject->count, &pTemplate[i]);
 
         if (!pAttribute)
         {

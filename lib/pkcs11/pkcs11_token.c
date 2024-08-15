@@ -260,7 +260,7 @@ CK_RV pkcs11_token_get_writable(CK_VOID_PTR pObject, CK_ATTRIBUTE_PTR pAttribute
         atecc508a_config_t * pConfig = (atecc508a_config_t*)obj_ptr->config;
 
         if ((ATCA_KEY_CONFIG_PRIVATE_MASK & pConfig->KeyConfig[obj_ptr->slot]) ||
-            (ATCA_SLOT_CONFIG_IS_SECRET_MASK & pConfig->SlotConfig[obj_ptr->slot]))
+                (ATCA_SLOT_CONFIG_IS_SECRET_MASK & pConfig->SlotConfig[obj_ptr->slot]))
         {
             return pkcs11_attrib_false(pObject, pAttribute);
         }
@@ -429,7 +429,7 @@ CK_RV pkcs11_token_random(CK_SESSION_HANDLE hSession, CK_BYTE_PTR pRandomData, C
         if (32 < ulRandomLen)
         {
             memcpy(pRandomData, buf, 32);
-	    pRandomData += 32;
+            pRandomData += 32;
             ulRandomLen -= 32;
         }
         else

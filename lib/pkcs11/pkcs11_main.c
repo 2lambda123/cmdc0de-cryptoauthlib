@@ -868,7 +868,7 @@ CK_RV C_GenerateKeyPair
 {
     PKCS11_DEBUG("\r\n");
     PKCS11_DEBUG_RETURN(pkcs11_key_generate_pair(hSession, pMechanism, pPublicKeyTemplate,
-                                                 ulPublicKeyAttributeCount, pPrivateKeyTemplate, ulPrivateKeyAttributeCount, phPublicKey, phPrivateKey));
+                        ulPublicKeyAttributeCount, pPrivateKeyTemplate, ulPrivateKeyAttributeCount, phPublicKey, phPrivateKey));
 }
 
 /**
