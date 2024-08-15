@@ -363,7 +363,7 @@ static int pkcs11_config_parse_buffer(char* buffer, size_t len, int argc, char* 
 
 static void pkcs11_config_split_string(char* s, char splitter, int * argc, char* argv[])
 {
-    char * e; 
+    char * e;
     int args = 1;
 
     if (!s || !argc || !argv)
@@ -742,7 +742,7 @@ static CK_RV pkcs11_config_load_objects(pkcs11_slot_ctx_ptr slot_ctx)
         {
             (void)snprintf(filename, sizeof(filename), "%s%d.%d.conf", pLibCtx->config_path, i, j);
             fp = fopen(filename, "rb");
-	
+
             if (fp)
             {
                 buflen = pkcs11_config_load_file(fp, &buffer);
