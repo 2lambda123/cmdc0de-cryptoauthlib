@@ -79,4 +79,96 @@ void atca_delay_ms(uint32_t delay)
     Sleep(delay);
 }
 
+/**
+ * \brief Application callback for creating a mutex object
+ * \param[IN/OUT] ppMutex location to receive ptr to mutex
+ * \param[IN] pName Name of the mutex for systems using named objects
+ */
+ATCA_STATUS hal_create_mutex(void** ppMutex, const char *pName)
+{
+    if (!ppMutex)
+    {
+        return ATCA_BAD_PARAM;
+    }
+
+    /* To share a lock in a dll across processing the mutexes must be named */
+    *ppMutex = CreateMutex(NULL, FALSE, pName);
+
+    if (!*ppMutex)
+    {
+        return ATCA_GEN_FAIL;
+    }
+
+    return ATCA_SUCCESS;
+}
+
+/*
+ * \brief Application callback for destroying a mutex object
+ * \param[IN] pMutex pointer to mutex
+ */
+ATCA_STATUS hal_destroy_mutex(void* pMutex)
+{
+    if (!pMutex)
+    {
+        return ATCA_BAD_PARAM;
+    }
+
+    CloseHandle(pMutex);
+
+    return ATCA_SUCCESS;
+}
+
+
+/*
+ * \brief Application callback for locking a mutex
+ * \param[IN] pMutex pointer to mutex
+ */
+ATCA_STATUS hal_lock_mutex(void* pMutex)
+{
+    DWORD rv;
+
+    if (!pMutex)
+    {
+        return ATCA_BAD_PARAM;
+    }
+
+    rv = WaitForSingleObject((HANDLE)pMutex, INFINITE);
+
+    if (WAIT_OBJECT_0 == rv)
+    {
+        return ATCA_SUCCESS;
+    }
+    else if (WAIT_ABANDONED_0 == rv)
+    {
+        /* Lock was obtained but its because another process terminated so the
+           state is indeterminate and will probably need to be fixed */
+        return ATCA_FUNC_FAIL;
+    }
+    else
+    {
+        return ATCA_GEN_FAIL;
+    }
+}
+
+/*
+ * \brief Application callback for unlocking a mutex
+ * \param[IN] pMutex pointer to mutex
+ */
+ATCA_STATUS hal_unlock_mutex(void* pMutex)
+{
+    ATCA_STATUS rv = ATCA_SUCCESS;
+
+    if (!pMutex)
+    {
+        return ATCA_BAD_PARAM;
+    }
+
+    if (!ReleaseMutex((HANDLE)pMutex))
+    {
+        rv = ATCA_GEN_FAIL;
+    }
+
+    return rv;
+}
+
 /** @} */

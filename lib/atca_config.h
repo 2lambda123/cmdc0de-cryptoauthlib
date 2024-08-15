@@ -1,5 +1,6 @@
-/** \file
- *  \brief Timer Utility Functions for Linux
+/**
+ * \file
+ * \brief Cryptoauthlib Configuration Defines
  *
  * \copyright (c) 2015-2018 Microchip Technology Inc. and its subsidiaries.
  *
@@ -24,48 +25,20 @@
  * THIS SOFTWARE.
  */
 
-#include <stdint.h>
-#include <unistd.h>
-#include "atca_hal.h"
+#ifndef _ATCA_CONFIG_H
+#define _ATCA_CONFIG_H
 
-/** \defgroup hal_ Hardware abstraction layer (hal_)
- *
- * \brief
- * These methods define the hardware abstraction layer for communicating with a CryptoAuth device
- *
-   @{ */
+/** Use I2C */
+//#define ATCA_HAL_I2C
 
+/** Use the following address for ECC devices */
+#define ATCA_I2C_ECC_ADDRESS    0x6A
 
-/** \brief This function delays for a number of microseconds.
- *
- * \param[in] delay number of microseconds to delay
- */
-void atca_delay_us(uint32_t delay)
-{
-    usleep(delay);
-}
+/** Define if cryptoauthlib is to use the maximum execution time method */
+#define ATCA_NO_POLL
 
-/** \brief This function delays for a number of tens of microseconds.
- *
- * \param[in] delay number of 0.01 milliseconds to delay
- */
-void atca_delay_10us(uint32_t delay)
-{
-    atca_delay_us(delay * 10);
-}
+/** Use RTOS timers (i.e. delays that yield) */
+//#define ATCA_USE_RTOS_TIMER
 
 
-/** \brief This function delays for a number of milliseconds.
- *
- *         You can override this function if you like to do
- *         something else in your system while delaying.
- * \param[in] delay number of milliseconds to delay
- */
-
-/* ASF already has delay_ms - see delay.h */
-void atca_delay_ms(uint32_t delay)
-{
-    atca_delay_us(delay * 1000);
-}
-
-/** @} */
+#endif

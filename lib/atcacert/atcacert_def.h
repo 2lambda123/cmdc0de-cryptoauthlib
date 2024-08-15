@@ -153,7 +153,6 @@ typedef struct atcacert_cert_loc_s
 /**
  * Defines a generic dynamic element for a certificate including the device and template locations.
  */
-
 typedef struct atcacert_cert_element_s
 {
     char                  id[25];                          //!< ID identifying this element.
